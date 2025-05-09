@@ -19,7 +19,7 @@ jobs:
     - name: Compile C++ code
       run: g++ main.cpp -o matrix_calculator.exe
 
-    - name: Upload EXE artifact
+    - name: Upload EXE
       uses: actions/upload-artifact@v3
       with:
         name: matrix_calculator_exe
