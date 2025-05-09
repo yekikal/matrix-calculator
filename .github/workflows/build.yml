@@ -1,0 +1,21 @@
+name: Build C++ EXE
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Compile C++ code
+      run: g++ -o matrix_calculator.exe main.cpp
+
+    - name: Upload EXE
+      uses: actions/upload-artifact@v3
+      with:
+        name: matrix_calculator_exe
+        path: matrix_calculator.exe
