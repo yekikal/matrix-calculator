@@ -1,20 +1,25 @@
 name: Build C++ EXE
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # Allows manual run from the Actions tab
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-latest  # Use Windows so we can generate a .exe
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Compile C++ code
-      run: g++ -o matrix_calculator.exe main.cpp
+    - name: Install g++
+      run: |
+        choco install mingw -y
+        echo "C:\ProgramData\chocolatey\bin" >> $GITHUB_PATH
 
-    - name: Upload EXE
+    - name: Compile C++ code
+      run: g++ main.cpp -o matrix_calculator.exe
+
+    - name: Upload EXE artifact
       uses: actions/upload-artifact@v3
       with:
         name: matrix_calculator_exe
